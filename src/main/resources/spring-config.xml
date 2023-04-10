@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--    id-si studentJon bo'lgan bean yaratildi -->
+    <bean id="studentJon" class="dasturlash.uz.Student"/>
+
+    <!--    name  studentHon bo'lgan bean yaratildi -->
+    <bean name="studentHon" class="dasturlash.uz.Student"/>
+
+    <!--    scope prototype bo'lgan bean yaratildi -->
+    <bean name="superStudent" class="dasturlash.uz.Student" scope="prototype"/>
+
+    <!--   constructor-arg (konstruktor) orqali bean ga qiymatlar berildi.-->
+    <bean name="professorOne" class="dasturlash.uz.Professor">
+        <constructor-arg name="name" value="Alish"/>
+        <constructor-arg name="surname" value="Aliyev"/>
+    </bean>
+
+    <!--   property - (set metodlari) orqali bean ga qiymatlar berildi.-->
+    <bean name="lesson" class="dasturlash.uz.Lesson">
+        <property name="title" value="Math"/>
+        <property name="lectureCount" value="40"/>
+    </bean>
+
+    <!--  autowiring mode  orqali bean-ni dependency-ni inject qilish-->
+    <bean name="engine" class="dasturlash.uz.Engine">
+        <constructor-arg name="name" value="SuperEngine"/>
+    </bean>
+
+    <bean name="vehicle" class="dasturlash.uz.Vehicle" autowire="byName"/>
+
+    <!--  lazy-initialization mode  orqali bean-ni birinchi marta chaqirilganda yaratilish-->
+    <bean name="lazyComponent" class="dasturlash.uz.LazyComponent">
+        <property name="someText" value="Jigarlar bormisizlar"/>
+    </bean>
+
+    <!--  initialization method  orqali component yaratilgandan keyin initializationMethod chaqirild -->
+    <bean name="initMethodComponent" class="dasturlash.uz.InitMethodComponent" init-method="initializationMethod">
+        <property name="title" value="SomeTitle"/>
+    </bean>
+
+    <!--  destruction method orqali component o'chirilishidan oldin destroyMethod chaqirildi  -->
+    <bean name="destroyMethodComponent" class="dasturlash.uz.DestroyMethodComponent" init-method="destroyMethod">
+        <constructor-arg name="title" value="Destroy method component"/>
+    </bean>
+
+</beans>
